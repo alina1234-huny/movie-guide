@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноГид - Найди свой фильм!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Анимированные волны -->
+    <div class="waves">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
+
+    <!-- Анимированные пузырьки -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="logo">
+                <h1>🎬 КиноГид</h1>
+                <p class="tagline">Фильмы, которые меняют твое будущее</p>
+            </div>
+            
+            <div class="form-content">
+                <h2>Найди фильмы по душе</h2>
+                <p class="form-description">Заполните форму, и мы подберем фильмы, которые помогут в выборе профессии</p>
+
+                <!-- Цитата о профессии -->
+                <div class="quote-section">
+                    <p class="quote-text">"Выберите профессию, которую вы любите, и вам не придется работать ни дня в своей жизни"</p>
+                    <p class="quote-author">— Конфуций</p>
+                </div>
+
+                <form action="process.php" method="POST" class="movie-form">
+                    <div class="input-group">
+                        <label for="userName">👤 Ваше имя:</label>
+                        <input type="text" id="userName" name="userName" required placeholder="Как вас зовут?">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="genre">🎭 Любимый жанр фильмов:</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">-- Выберите жанр --</option>
+                            <option value="comedy">😂 Комедия</option>
+                            <option value="drama">🎭 Драма</option>
+                            <option value="action">💥 Боевик</option>
+                            <option value="fantasy">🧙‍♂️ Фэнтези</option>
+                            <option value="horror">👻 Ужасы</option>
+                            <option value="sci-fi">🚀 Научная фантастика</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        🎯 Узнать рекомендации!
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Простая анимация появления
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.form-container');
+            form.style.opacity = '0';
+            form.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                form.style.transition = 'all 0.8s ease';
+                form.style.opacity = '1';
+                form.style.transform = 'translateY(0)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
