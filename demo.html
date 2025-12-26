@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноГид - Найди свой фильм!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Анимированные волны -->
+    <div class="waves">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
+
+    <!-- Анимированные пузырьки -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="logo">
+                <h1>🎬 КиноГид</h1>
+                <p class="tagline">Фильмы, которые меняют твое будущее</p>
+            </div>
+            
+            <div class="form-content">
+                <h2>Найди фильмы по душе</h2>
+                <p class="form-description">Заполните форму, и мы подберем фильмы, которые помогут в выборе профессии</p>
+
+                <!-- Цитата о профессии -->
+                <div class="quote-section">
+                    <p class="quote-text">"Выберите профессию, которую вы любите, и вам не придется работать ни дня в своей жизни"</p>
+                    <p class="quote-author">— Конфуций</p>
+                </div>
+
+                <form action="process.php" method="POST" class="movie-form">
+                    <div class="input-group">
+                        <label for="userName">👤 Ваше имя:</label>
+                        <input type="text" id="userName" name="userName" required placeholder="Как вас зовут?">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="genre">🎭 Любимый жанр фильмов:</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">-- Выберите жанр --</option>
+                            <option value="comedy">😂 Комедия</option>
+                            <option value="drama">🎭 Драма</option>
+                            <option value="action">💥 Боевик</option>
+                            <option value="fantasy">🧙‍♂️ Фэнтези</option>
+                            <option value="horror">👻 Ужасы</option>
+                            <option value="sci-fi">🚀 Научная фантастика</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        🎯 Узнать рекомендации!
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Простая анимация появления
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.form-container');
+            form.style.opacity = '0';
+            form.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                form.style.transition = 'all 0.8s ease';
+                form.style.opacity = '1';
+                form.style.transform = 'translateY(0)';
+            }, 200);
+        });
+    </script>
+</body>
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Анимированные волны */
+.waves {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.4;
+    animation: waveAnim 15s infinite linear;
+}
+
+.wave-1 {
+    animation-duration: 20s;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.6;
+}
+
+.wave-2 {
+    animation-duration: 15s;
+    animation-delay: -5s;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    opacity: 0.4;
+}
+
+.wave-3 {
+    animation-duration: 25s;
+    animation-delay: -2s;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    opacity: 0.3;
+}
+
+@keyframes waveAnim {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(-25%) translateY(-10px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Анимированные пузырьки */
+.bubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: bubbleAnim 8s infinite ease-in-out;
+}
+
+.bubble:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.bubble:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    left: 25%;
+    animation-delay: 2s;
+    animation-duration: 15s;
+}
+
+.bubble:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    animation-delay: 4s;
+    animation-duration: 10s;
+}
+
+.bubble:nth-child(4) {
+    width: 100px;
+    height: 100px;
+    left: 70%;
+    animation-delay: 1s;
+    animation-duration: 14s;
+}
+
+.bubble:nth-child(5) {
+    width: 90px;
+    height: 90px;
+    left: 85%;
+    animation-delay: 3s;
+    animation-duration: 11s;
+}
+
+.bubble:nth-child(6) {
+    width: 70px;
+    height: 70px;
+    left: 40%;
+    animation-delay: 5s;
+    animation-duration: 13s;
+}
+
+@keyframes bubbleAnim {
+    0%, 100% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(75vh) scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(50vh) scale(1.2);
+        opacity: 0.5;
+    }
+    75% {
+        transform: translateY(25vh) scale(0.9);
+        opacity: 0.3;
+    }
+}
+
+/* Основной контейнер */
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Контейнер формы */
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Логотип */
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tagline {
+    color: #666;
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+/* Контент формы */
+.form-content h2 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-description {
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1em;
+}
+
+/* Группы ввода */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1em;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.input-group input::placeholder {
+    color: #999;
+}
+
+/* Цитата о профессии */
+.quote-section {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+    text-align: center;
+}
+
+.quote-text {
+    font-style: italic;
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.quote-author {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Стили для страницы результатов */
+.results-container {
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.results-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Заголовок результатов */
+.results-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.results-header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Описание жанра */
+.genre-description {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border-left: 5px solid #667eea;
+}
+
+.genre-description h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.genre-description p {
+    color: #666;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Сетка фильмов */
+.movies-section {
+    margin-bottom: 40px;
+}
+
+.movies-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.movie-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.movie-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.movie-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-image img {
+    transform: scale(1.1);
+}
+
+.movie-info {
+    padding: 20px;
+}
+
+.movie-info h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.watch-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #4a76a8, #3d638f);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.watch-link:hover {
+    background: linear-gradient(135deg, #3d638f, #31527a);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 118, 168, 0.3);
+}
+
+/* Профессиональные рекомендации */
+.career-recommendations {
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 20px;
+    color: white;
+}
+
+.career-recommendations h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.career-recommendations > p {
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.profession-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.profession-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profession-card h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 8px;
+}
+
+.prof-description {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.recommended-films ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommended-films li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.recommended-films li:last-child {
+    border-bottom: none;
+}
+
+/* Навигация */
+.navigation {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.back-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #6c757d, #545b62);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(108, 117, 125, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .form-container,
+    .results-content {
+        margin: 10px;
+        padding: 25px;
+    }
+    
+    .movies-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profession-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo h1 {
+        font-size: 2em;
+    }
+    
+    .results-header h1 {
+        font-size: 2em;
+    }
+    
+    .bubble {
+        display: none; /* Скрываем пузырьки на мобильных */
+    }
+}
+
+  
+</html>
